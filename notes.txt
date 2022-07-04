@@ -1,0 +1,441 @@
+1) Project Setup
+    - Install Gulp
+    npm init
+    npm install gulp gulp-sass sass --save-dev
+
+    - Create gulpfile.js 
+    const { src, dest, watch, series } = require('gulp')
+    const sass = require('gulp-sass')(require('sass'))
+
+    function buildStyles() {
+        return src('index.scss')
+            .pipe(sass())
+            .pipe(dest('css'))
+    }
+
+    function watchTask() {
+        watch(['index.scss'], buildStyles)
+    }
+
+    exports.default = series(buildStyles, watchTask)
+
+    - To run "live sass" plugin, run "gulp" in terminal
+
+2) Variables
+    - To create, prefix the name of the variable with '$'
+    $space_padding = 0.75rem;
+    $base_color = #123456;
+
+3) Partials & @import
+    - Create a file 'variables.scss'
+    - Open 'gulpfile.js'
+        => Change index.scss into *.scss
+
+    - To exclude variables.scss from being compiled into a single variables.css file under css directory, rename it into '_variables.scss'
+
+    - To import scss in another scss file, 
+    @import 'file_name_without_extension'
+
+4) Project Structure
+    - Create a directory under the main project, either 'scss' or the project name itself
+    - Move every file with .scss extension to that directory
+    - Go to 'gulpfile.js'
+    change index.scss into '/new_directory/**/*.scss'
+
+5) Nested rules
+    .card {
+        .card-title{
+
+        }
+        .card-body {
+
+        }
+        .card-footer {
+
+        }
+    }
+
+    will be converted into:
+    .card .card-title{}
+    .card .card-body{}
+    .card .card-footer{}
+
+6) Math
+    - Addition
+    $base-font-size: 1rem;
+    $font-size-sm: $base-font-size * 0.75;
+
+    - Package
+    @use 'sass:math';
+
+    - Other functions
+    @debug math.div(10, 3);
+    @debug math.$pi;
+    @debug math.floor(2.6);
+    @debug math.max(1px, 20px, 15px, 12px);
+
+7) Maps
+    $colors: (
+        "primary": $primary,
+        "secondary": $secondary,
+    )
+
+    .test-btn {
+        background: map-get($colors, "purple");
+    }
+
+    @debug map-get($colors, "purple");
+    @debug map-has-key($colors, "secondary");
+    @debug map-has-key($colors, "tertiary");
+    @debug map-remove($colors, "primary");
+    @debug map-merge($colors, ("pink": #ffc0cb));
+
+8) Loops
+    - Foreach
+    @each $key, $val in $colors {
+        .text-#{$key} {
+            color: $val;
+        }
+        .bg-#{$key} {
+            background-color: $val;
+        }
+    }
+
+    - For
+    @for $i from 1 through 9 {
+        .text-#{$val}-light-#{$i} {
+            color: mix(white, $val, $i * 10);
+        }
+    }
+
+9) Conditional
+    @if ($val != black and $val != white) {
+    } else {}
+
+10) Parent Selectors
+     .text-hover-#{$key} {
+        &:hover {
+            color: $val;
+        }
+    }
+
+11) Mixins
+    @mixin btn($bg-color: grey) {
+
+    }
+
+    .btn {
+        @include btn;
+    }
+
+    $each $key, $val in $colors {
+        .btn-#{$key} {
+            @include btn($val);
+            &:hover {
+                color: lighten($val, 5);
+            }
+        }
+    }
+
+12) Functions
+    @function light-comp($color) {
+        $complement: complement($color);
+        $light-complement: lighten($complement, 30%);
+        @return $light-complement;
+    }
+
+    .btn-complement-#{$key} {
+        @include btn($val);
+        color: light-comp($val);
+        &:hover {
+            color: $val;
+            background-color: light-comp($val);
+        }
+    }
+
+13) Utilities
+    - _utilities.scss
+    @use "sass:math";
+
+    $utilities: (
+    "padding": (
+        "prefix": "p",
+        "values": (
+        "0": 0,
+        "1": $base-padding,
+        "2": $base-padding * 2,
+        "3": $base-padding * 4,
+        "4": $base-padding * 6,
+        "5": $base-padding * 8,
+        ),
+    ),
+    "padding-left": (
+        "prefix": "pl",
+        "values": (
+        "0": 0,
+        "1": $base-padding,
+        "2": $base-padding * 2,
+        "3": $base-padding * 4,
+        "4": $base-padding * 6,
+        "5": $base-padding * 8,
+        ),
+    ),
+    "padding-right": (
+        "prefix": "pr",
+        "values": (
+        "0": 0,
+        "1": $base-padding,
+        "2": $base-padding * 2,
+        "3": $base-padding * 4,
+        "4": $base-padding * 6,
+        "5": $base-padding * 8,
+        ),
+    ),
+    "padding-top": (
+        "prefix": "pt",
+        "values": (
+        "0": 0,
+        "1": $base-padding,
+        "2": $base-padding * 2,
+        "3": $base-padding * 4,
+        "4": $base-padding * 6,
+        "5": $base-padding * 8,
+        ),
+    ),
+    "padding-bottom": (
+        "prefix": "pb",
+        "values": (
+        "0": 0,
+        "1": $base-padding,
+        "2": $base-padding * 2,
+        "3": $base-padding * 4,
+        "4": $base-padding * 6,
+        "5": $base-padding * 8,
+        ),
+    ),
+    "margin": (
+        "prefix": "m",
+        "values": (
+        "0": 0,
+        "1": $base-margin,
+        "2": $base-margin * 2,
+        "3": $base-margin * 4,
+        "4": $base-margin * 6,
+        "5": $base-margin * 8,
+        ),
+    ),
+    "margin-left": (
+        "prefix": "ml",
+        "values": (
+        "0": 0,
+        "1": $base-margin,
+        "2": $base-margin * 2,
+        "3": $base-margin * 4,
+        "4": $base-margin * 6,
+        "5": $base-margin * 8,
+        ),
+    ),
+    "margin-right": (
+        "prefix": "mr",
+        "values": (
+        "0": 0,
+        "1": $base-margin,
+        "2": $base-margin * 2,
+        "3": $base-margin * 4,
+        "4": $base-margin * 6,
+        "5": $base-margin * 8,
+        ),
+    ),
+    "margin-top": (
+        "prefix": "mt",
+        "values": (
+        "0": 0,
+        "1": $base-margin,
+        "2": $base-margin * 2,
+        "3": $base-margin * 4,
+        "4": $base-margin * 6,
+        "5": $base-margin * 8,
+        ),
+    ),
+    "margin-bottom": (
+        "prefix": "mb",
+        "values": (
+        "0": 0,
+        "1": $base-margin,
+        "2": $base-margin * 2,
+        "3": $base-margin * 4,
+        "4": $base-margin * 6,
+        "5": $base-margin * 8,
+        ),
+    ),
+    "opacity": (
+        "prefix": "o",
+        "values": (
+        "10": 0.1,
+        "20": 0.2,
+        "30": 0.3,
+        "40": 0.4,
+        "50": 0.5,
+        "60": 0.6,
+        "70": 0.7,
+        "80": 0.8,
+        "90": 0.9,
+        "100": 1,
+        ),
+    ),
+    "border-radius": (
+        "prefix": "br",
+        "values": (
+        "default": $base-border-radius,
+        "none": 0,
+        "xs": math.div($base-border-radius, 4),
+        "sm": math.div($base-border-radius, 2),
+        "lg": $base-border-radius * 2,
+        "full": 50%,
+        ),
+    ),
+    "display": (
+        "prefix": "display",
+        "values": (
+        "n": none,
+        "b": block,
+        "f": flex,
+        "i": inline,
+        "i-b": inline-block,
+        ),
+    ),
+    "font-size": (
+        "prefix": "font",
+        "values": (
+        "sm": $font-size-sm,
+        "md": $base-font-size,
+        "lg": $font-size-lg,
+        "xl": $font-size-xl,
+        "xxl": $font-size-xxl,
+        ),
+    ),
+    );
+
+    // generate utility classes
+    @each $property, $map in $utilities {
+    $prefix: map-get($map, "prefix");
+    $values: map-get($map, "values");
+
+    @each $k, $v in $values {
+        @if($k == "default") {
+        .#{$prefix} {
+            #{$property}:  $v;
+        }
+        } @else {
+        .#{$prefix}-#{$k} {
+            #{$property}: $v;
+        }
+        }
+    }
+    }
+
+14) Media Queries
+    - _breakpoints.scss
+        $breakpoints: (
+        "xs": 0,
+        "sm": 480px,
+        "md": 720px,
+        "lg": 960px,
+        "xl": 1200px,
+    );
+
+    @mixin xs {
+        @media (min-width: map-get($breakpoints, "xs")) {
+            @content;
+        }
+    }
+    @mixin sm {
+        @media (min-width: map-get($breakpoints, "sm")) {
+            @content;
+        }
+    }
+    @mixin md {
+        @media (min-width: map-get($breakpoints, "md")) {
+            @content;
+        }
+    }
+    @mixin lg {
+        @media (min-width: map-get($breakpoints, "lg")) {
+            @content;
+        }
+    }
+    @mixin xl {
+        @media (min-width: map-get($breakpoints, "xl")) {
+            @content;
+        }
+    }
+
+    @mixin breakpoint($bp: 0) {
+        @media (min-width: $bp) {
+            @content;
+        }
+    }
+
+    .responsive-text {
+        @include xs {
+            color: red;
+        }
+        @include sm {
+            color: blue;
+        }
+        @include md {
+            color: green;
+        }
+        @include lg {
+            color: purple;
+        }
+        @include xl {
+            color: orange;
+        }
+
+        @include breakpoint(1200px) {
+            color: pink;
+        }
+    }
+
+15) Grid Systems
+    Array without keys
+    $space-values: flex-start, flex-end, space-between, space-around, center
+
+16) Extend
+    %flex-layout {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+    }
+
+    .navbar {
+        @extend %flex-layout;
+        padding: $base-padding $base-padding * 2;
+        box-shadow: $base-box-shadow;
+        .site-title {
+            font-size: $font-size-lg;
+        }
+        .container {
+            @extend %flex-layout;
+        }
+    }
+
+    @each $key, $val in $colors {
+        .navbar-#{$key} {
+            @extend .navbar;
+            background-color: $val;
+        }
+    }
+
+    Why is the name of the extended css' name prefixed with "%", test so you know why.
+
+    - With "%"
+    .navbar {}
+
+    - Without "%" or with "."
+    .flex-layout .navbar {}
+
+17) 

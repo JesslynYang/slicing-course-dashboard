@@ -1,0 +1,132 @@
+.nav {
+    @include flex-bc;
+    flex-wrap: wrap;
+
+    padding: 30px 10px;
+    
+    @include md {
+        flex-wrap: nowrap;
+    }
+    
+    @include lg {
+        padding: 70px 60px;
+    }
+
+    #toggle-navbar {
+        border-radius: 50%;
+        overflow: hidden;
+
+        padding: 4px;
+
+        border: 2px solid $primary;
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+}
+
+.nav- {
+    &title {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 48px;
+        color: $text;
+
+    }
+
+    &input-container {
+        width: 100% !important;
+        
+    }
+
+    &input-group {
+        height: 60px;
+        padding: 0 20px;
+
+        width: auto;
+
+        background: $bg-secondary;
+        border-radius: 15px;
+
+        .btn-nav-input {
+            @include button;
+            width: auto;
+
+            margin-right: 14px;
+
+            img {
+                width: 26px;
+                height: 26px;
+            }
+        }
+
+        // @include md {
+        //     width: 400px !important;
+        // } 
+
+        // @include lg {
+        //     width: 400px;
+        // } 
+
+        // @include xl {
+        //     width: 500px;
+        // } 
+    }
+
+    &input {
+        @include flex-sc;
+        @include input;
+
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+
+        color: $text-input;
+
+        width: 100%;
+
+        // @include xs {
+        //     font-size: 16px;
+        //     line-height: 27px;
+        // }
+
+        @include sm {
+            font-size: 18px;
+        }
+
+    }
+}
+
+.btn-nav {
+    @include button;
+    @include flex-sc;
+
+    height: 60px;
+    padding: 0 20px;
+
+    background: $bg-secondary;
+    border-radius: 15px;
+
+    span {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        color: $text-input;
+    }
+
+    &.filters {
+        margin-left: 20px;
+        img {
+            margin-right: 12px;
+        }
+
+        &.sm {
+            margin-left: 0;
+        }
+    }
+}

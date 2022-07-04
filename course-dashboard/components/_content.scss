@@ -1,0 +1,173 @@
+.content {
+  padding: 0 10px;
+
+  @include lg {
+      padding: 0px 60px;
+  }
+}
+
+.content- {
+  &title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 36px;
+
+    color: $text;
+
+    @include sm {
+        font-size: 28px;
+        line-height: 42px;
+    }
+  }
+}
+
+.progress- {
+  &card {
+    padding: 30px 20px 20px 20px;
+    border-radius: 28px;
+    margin-bottom: 15px;
+
+    .progress-name {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+
+      color: $text;
+    }
+
+    .progress-total {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    &.pink {
+      background-color: $pink;
+
+      .progress-total {
+        color: $text_pink;
+      }
+    }
+    &.blue {
+      background-color: $blue;
+
+      .progress-total {
+        color: $dark_blue;
+      }
+    }
+    &.green {
+      background-color: $green;
+
+      .progress-total {
+        color: $dark_green;
+      }
+    }
+    &.purple {
+      background-color: $purple;
+
+      .progress-total {
+        color: $dark_purple;
+      }
+    }
+  }
+}
+
+.competition- {
+  &row {
+    margin-top: 50px;
+  }
+
+  &card {
+    background: $bg-secondary;
+    padding: 20px 20px 75px 20px;
+    border-radius: 28px;
+
+    margin-bottom: 15px;
+  }
+
+  &title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+
+    color: $text;
+
+    overflow: hidden; /* make sure it hides the content that overflows */
+    white-space: nowrap; /* don't break the line */
+    text-overflow: ellipsis;
+
+    &:hover {
+        white-space: normal;
+        text-overflow: clip;
+    }
+  }
+
+  &price {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 24px;
+
+    color: $text-comp;
+  }
+
+  &desc {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+
+    color: $text;
+
+    margin: 20px 0;
+    height: auto;
+    overflow: hidden;
+
+    @include lg {
+        height: 80px;
+    }
+  }
+
+  &img {
+    @include flex-cc;
+    background-color: $primary;
+    margin-right: -10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      text-align: center;
+
+      color: $bg;
+    }
+  }
+
+  &btn {
+    @include flex-cc;
+    @include button;
+    width: 100%;
+    height: 40px;
+
+
+    background: $primary;
+    border-radius: 11px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+
+    color: $bg;
+
+   @include md {
+    width: 117px;
+   }
+  }
+}

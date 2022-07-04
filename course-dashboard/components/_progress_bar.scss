@@ -1,0 +1,111 @@
+$stroke-length: 316.5px;
+
+.progress-card {
+
+  .percent {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  svg {
+    overflow: visible;
+     position: relative;
+    width: 100px;
+    height: 100px;
+    transform: rotate(-90deg);
+  }
+
+  svg circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 8;
+    transition: all 1s;
+
+  }
+
+  svg circle:last-of-type {
+    stroke-dasharray: $stroke-length;
+    stroke-dashoffset: $stroke-length;
+
+   
+  }
+
+  svg circle:last-of-type.running {
+ stroke-dasharray: $stroke-length;
+    stroke-dashoffset: calc($stroke-length - ($stroke-length * var(--percent)) / 100);
+  }
+
+  .number {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .number h3 {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 33px;
+    margin-bottom: 0px;
+    text-align: center;
+    
+  }
+
+  &.pink {
+    svg circle {
+      stroke: $border_pink;
+    }
+
+    svg circle:last-of-type {
+      stroke: $dark_pink; 
+    }
+
+    .progress-percentage {
+      color: $dark_pink;
+    }
+  }
+
+  &.purple {
+    svg circle {
+      stroke: $border_purple;
+    }
+
+    svg circle:last-of-type {
+      stroke: $dark_purple; 
+    }
+    
+    .progress-percentage {
+      color: $dark_purple; 
+    }
+  }
+
+  &.blue {
+    svg circle {
+      stroke: $border_blue;
+    }
+
+    svg circle:last-of-type {
+      stroke: $dark_blue; 
+    }
+    .progress-percentage {
+      color: $dark_blue; 
+    }
+  }
+
+  &.green {
+    svg circle {
+      stroke: $border_green;
+    }
+
+    svg circle:last-of-type {
+      stroke: $dark_green; 
+    }
+    .progress-percentage {
+      color: $dark_green; 
+    }
+  }
+}

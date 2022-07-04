@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+$primary: #5843BE;
+$secondary: #1A55AF; //
+$secondary_light: #ECF6FF; //
+$border: #E6E6E6;
+$tertiary: #D7D7F8; //
+$bg: #FFFFFF;
+$bg-light: #fff; //
+$bg-secondary: #F6F7F8;
+$text: #000000;
+$text-light: #7A7E86;
+$text-secondary: #E7EAF5; //
+$aside: #FFFFFF;
+$default: transparent;
+
+$text-input: #787C84;
+
+$text-comp: #989ba1;
+
+$icon: #A5AAB5;
+
+$text_pink: #856B6E;
+$pink: #FFE7EA;
+$dark_pink: #B46F78;
+$border_pink: #E8CCCF;
+
+$purple: #F6F4FF;
+$dark_purple: #5843BE;
+$border_purple: #D6D2E9;
+
+$blue:  #ECF6FF;
+$dark_blue: #1A55AF;
+$border_blue: #D2E2F1;
+
+$green: #FFFBF0;
+$dark_green: #427A0A;
+$border_green: #EBE6D8;
+
+$orange: #FEECD7;
+$dark_orange: #FF865D;
+
+$orange_opaque: rgba(255, 134, 93, .54);
+
+
+$pending: #FEBD57;
+$success: #1ABC9C;
+$failed: #FE5761;
+
+
+html, body {
+    font-family: 'Poppins';
+    font-style: normal;
+    background-color: $bg;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 70px;
+}
+
+@mixin flex-sc {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@mixin flex-cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-bc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+%utility-reset {
+    background-color: $default;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+@mixin button {
+    @extend %utility-reset;
+    
+    :hover {
+        text-decoration: none;
+    }
+}
+
+@mixin input {
+    @extend %utility-reset
+}
+
+.screen-cover {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .4);
+
+    display: block;
+    z-index: 2;
+
+}
