@@ -369,7 +369,7 @@ aside #toggle-navbar {
 }
 .competition-card {
   background: #F6F7F8;
-  padding: 20px 20px 75px 20px;
+  padding: 20px;
   border-radius: 28px;
   margin-bottom: 15px;
 }
@@ -378,8 +378,10 @@ aside #toggle-navbar {
   font-size: 20px;
   line-height: 30px;
   color: #000000;
-  overflow: hidden; /* make sure it hides the content that overflows */
-  white-space: nowrap; /* don't break the line */
+  overflow: hidden;
+  /* make sure it hides the content that overflows */
+  white-space: nowrap;
+  /* don't break the line */
   text-overflow: ellipsis;
 }
 .competition-title:hover {
